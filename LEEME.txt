@@ -1,0 +1,27 @@
+PORTAL DE LUZ — AVATAR HUMANO
+
+Contenido:
+- index.html: proyecto completo en un solo archivo.
+- Diseño vertical 9:16 para TikTok LIVE.
+- Avatar humano estilizado con boca animada.
+- 10 mensajes diferentes y largos.
+- Voz en español mediante la voz del navegador.
+- Botón ACTIVAR VOZ para superar el bloqueo de reproducción automática.
+- Botón NUEVO MENSAJE para cambiar el mensaje.
+
+IMPORTANTE PARA TIKTOK LIVE STUDIO:
+La voz SpeechSynthesis depende del navegador y puede estar bloqueada cuando una página se carga dentro de una fuente web/URL de TikTok. Por eso el botón ACTIVAR VOZ debe pulsarse después de cargar la página. Si TikTok sigue sin reproducirla, el problema es el bloqueo de audio del navegador/visor de TikTok, no el diseño del avatar.
+
+PARA GITHUB PAGES:
+El archivo debe llamarse exactamente:
+index.html
+No cambiarlo por indice.html ni por otro nombre.
+
+PASOS:
+1. Sube index.html al repositorio.
+2. Activa GitHub Pages.
+3. Abre la URL de Pages en Chrome.
+4. Pulsa ACTIVAR VOZ.
+5. Pulsa NUEVO MENSAJE para probar los distintos mensajes.
+6. Después usa esa URL como fuente web/URL en TikTok LIVE Studio.
+

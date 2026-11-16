@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Portal de Luz — Avatar Humano</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111f;font-family:Arial,sans-serif}
+body{display:flex;align-items:center;justify-content:center}
+.stage{
+  width:min(100vw,56.25vh);height:min(100vh,177.78vw);
+  min-width:320px;min-height:569px;max-width:720px;max-height:1280px;
+  position:relative;overflow:hidden;border-radius:18px;
+  background:radial-gradient(circle at 50% 18%,#315a83 0,#142d48 32%,#07111f 78%);
+  color:white;box-shadow:0 0 50px #000;
+}
+.stars{position:absolute;inset:0;background-image:
+ radial-gradient(circle at 12% 18%,#fff 0 1px,transparent 2px),
+ radial-gradient(circle at 80% 13%,#fff 0 1px,transparent 2px),
+ radial-gradient(circle at 28% 40%,#d9efff 0 1px,transparent 2px),
+ radial-gradient(circle at 88% 46%,#fff 0 1px,transparent 2px),
+ radial-gradient(circle at 18% 70%,#fff 0 1px,transparent 2px),
+ radial-gradient(circle at 72% 76%,#d9efff 0 1px,transparent 2px);
+ opacity:.55}
+.title{position:absolute;top:3.5%;left:0;right:0;text-align:center;font-size:clamp(20px,5vw,34px);font-weight:700;letter-spacing:2px;text-shadow:0 2px 12px #000}
+.subtitle{position:absolute;top:8.5%;left:8%;right:8%;text-align:center;font-size:clamp(12px,3.1vw,19px);opacity:.9}
+.avatarWrap{position:absolute;left:50%;top:15%;transform:translateX(-50%);width:72%;height:48%}
+.halo{position:absolute;left:50%;top:7%;transform:translateX(-50%);width:72%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#e7f6ff55 0,#a9ddff22 48%,transparent 70%);filter:blur(3px)}
+.shoulders{position:absolute;bottom:0;left:8%;right:8%;height:35%;border-radius:50% 50% 8% 8%/45% 45% 8% 8%;background:linear-gradient(120deg,#1a4264,#326f92 45%,#122f4c);box-shadow:inset 0 8px 20px #8ed9ff33}
+.neck{position:absolute;left:43%;bottom:25%;width:14%;height:15%;background:linear-gradient(90deg,#a86f51,#d39a77,#8d593f);border-radius:25%}
+.head{position:absolute;left:23%;top:12%;width:54%;height:60%;border-radius:47% 47% 45% 45%/43% 43% 52% 52%;background:linear-gradient(105deg,#7d4b38,#c58a68 44%,#e0ad87 58%,#734331);box-shadow:inset -13px -10px 25px #351b18aa, inset 10px 0 15px #f6c6a050}
+.hair{position:absolute;left:17%;top:4%;width:66%;height:35%;border-radius:50% 50% 35% 35%;background:radial-gradient(circle at 45% 20%,#493126,#17120f 65%);clip-path:polygon(0 40%,8% 18%,25% 7%,50% 0,76% 9%,93% 24%,100% 48%,91% 42%,83% 54%,70% 40%,58% 56%,42% 42%,28% 55%,15% 42%,7% 58%)}
+.ear{position:absolute;top:44%;width:12%;height:16%;border-radius:50%;background:#a86c50}
+.ear.l{left:17%}.ear.r{right:17%}
+.eye{position:absolute;top:43%;width:15%;height:5%;background:#fff;border-radius:50%;box-shadow:0 0 0 2px #3c241d}
+.eye:after{content:"";position:absolute;left:42%;top:10%;width:28%;height:75%;border-radius:50%;background:#202020}
+.eye.l{left:29%}.eye.r{right:29%}
+.brow{position:absolute;top:38%;width:19%;height:2.2%;background:#3b231c;border-radius:50%;transform:rotate(-4deg)}
+.brow.l{left:26%}.brow.r{right:26%;transform:rotate(4deg)}
+.nose{position:absolute;left:46%;top:47%;width:8%;height:19%;border-right:3px solid #74422f;border-bottom:3px solid #74422f;border-radius:0 0 45% 0;opacity:.7}
+.mouth{position:absolute;left:39%;top:70%;width:22%;height:4%;border-radius:0 0 50% 50%;background:#6b2f2b;transition:.08s}
+.mouth.talking{height:9%;border-radius:50%;box-shadow:0 0 0 2px #7e3a35;animation:talk .14s infinite alternate}
+@keyframes talk{from{transform:scaleY(.7)}to{transform:scaleY(1.15)}}
+.messageBox{position:absolute;left:7%;right:7%;bottom:15%;min-height:17%;padding:5% 6%;
+background:#071827d9;border:1px solid #9bdfff66;border-radius:22px;box-shadow:0 8px 30px #0008;
+display:flex;align-items:center;justify-content:center;text-align:center}
+.message{font-size:clamp(16px,4.2vw,25px);line-height:1.35}
+.controls{position:absolute;bottom:2.2%;left:6%;right:6%;display:flex;gap:8px;z-index:20}
+button{flex:1;border:0;border-radius:14px;padding:12px 8px;font-weight:700;font-size:clamp(12px,3.2vw,17px);background:#d8f2ff;color:#102238;cursor:pointer}
+button.secondary{background:#ffffff20;color:white;border:1px solid #ffffff44}
+.status{position:absolute;top:12.2%;left:0;right:0;text-align:center;font-size:11px;opacity:.65}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stars"></div>
+  <div class="title">PORTAL DE LUZ</div>
+  <div class="subtitle">Un mensaje de paz, amor y esperanza</div>
+  <div id="status" class="status">Pulsa ACTIVAR VOZ una vez para permitir el audio</div>
+
+  <div class="avatarWrap">
+    <div class="halo"></div><div class="shoulders"></div><div class="neck"></div>
+    <div class="head">
+      <div class="hair"></div><div class="ear l"></div><div class="ear r"></div>
+      <div class="brow l"></div><div class="brow r"></div>
+      <div class="eye l"></div><div class="eye r"></div>
+      <div class="nose"></div><div id="mouth" class="mouth"></div>
+    </div>
+  </div>
+
+  <div class="messageBox"><div id="message" class="message"></div></div>
+
+  <div class="controls">
+    <button id="voiceBtn">ACTIVAR VOZ</button>
+    <button id="nextBtn" class="secondary">NUEVO MENSAJE</button>
+  </div>
+</div>
+
+<script>
+const messages = [
+"Hoy quiero recordarte que no tienes que tener todas las respuestas. Hay momentos en los que avanzar significa simplemente dar un pequeño paso y confiar en que el siguiente aparecerá cuando llegue el momento.",
+"Que encuentres serenidad allí donde ahora hay preocupación. Respira profundamente, baja el ritmo y date permiso para vivir este día sin exigir que todo quede solucionado de inmediato.",
+"Hay etapas que parecen largas porque están enseñándonos algo importante. No te castigues por avanzar despacio. Cada experiencia puede ayudarte a descubrir una fuerza que no sabías que tenías.",
+"Que el amor entre en tu día de una manera sencilla: una conversación, una sonrisa, un recuerdo bonito o un gesto inesperado. A veces las cosas pequeñas son las que más nos sostienen.",
+"Si hoy estás cansado, escucha esa sensación y date un poco de descanso. No tienes que demostrar nada constantemente. Cuidarte también forma parte de seguir adelante.",
+"Hay puertas que se cierran porque necesitan dejar espacio a otras. No tengas miedo de los cambios. Algunas oportunidades llegan precisamente cuando dejamos de aferrarnos a lo que ya terminó.",
+"Que la tranquilidad vuelva poco a poco a tu corazón. Lo que ahora parece enorme puede sentirse diferente después de descansar, hablar con alguien y mirar la situación desde otra perspectiva.",
+"Recuerda que pedir compañía cuando la necesitas no te hace débil. Todos atravesamos momentos en los que necesitamos una palabra, una mano amiga o simplemente sentir que alguien nos escucha.",
+"Quizá hoy no sea el día de tomar grandes decisiones. Quizá sea simplemente un día para respirar, observar y dejar que tus pensamientos se ordenen. Mañana podrás volver a mirar las cosas.",
+"Que tengas paciencia contigo. Has pasado por situaciones que quizá nadie conoce completamente, y aun así sigues aquí intentando avanzar. Eso ya dice mucho de tu capacidad para seguir adelante.",
+"Cuando una preocupación ocupe demasiado espacio en tu mente, intenta volver al presente. Mira lo que tienes delante, respira y concéntrate solamente en el siguiente paso, no en todo el camino.",
+"Hay recuerdos que duelen y otros que nos enseñan. No necesitas borrar tu pasado para continuar. Puedes agradecer lo aprendido y elegir poco a poco qué quieres llevar contigo hacia el futuro.",
+"Que hoy recibas una noticia que te alegre, una llamada que esperabas o simplemente un momento de calma. No siempre necesitamos grandes acontecimientos para sentir que la vida nos regala algo bonito.",
+"Si estás esperando que algo cambie, recuerda que también puedes cambiar la manera de atravesar la espera. Busca pequeños motivos para disfrutar del presente mientras aquello que deseas llega a su tiempo.",
+"Tu valor no depende de que todo te salga bien. También eres valioso cuando dudas, cuando te equivocas, cuando necesitas parar y cuando vuelves a intentarlo después de un día difícil.",
+"Hay personas que llegan a nuestra vida y dejan una enseñanza. Otras permanecen durante mucho tiempo. Agradece cada vínculo que te haya ayudado a crecer y cuida especialmente de quienes te aportan paz.",
+"Que puedas dejar atrás por un momento aquello que no puedes controlar. Hay cosas que dependen de ti y otras que no. Guarda tu energía para aquello sobre lo que sí puedes actuar.",
+"Si sientes que has perdido la ilusión, no pienses que tiene que volver de golpe. A veces regresa lentamente, a través de pequeños momentos que empiezan a despertar de nuevo las ganas de disfrutar.",
+"Hoy puede ser un buen día para perdonarte por algo que todavía te pesa. Todos cometemos errores. Aprender de ellos es importante, pero castigarte continuamente no cambia lo ocurrido.",
+"Que la esperanza permanezca contigo incluso cuando no veas todavía el resultado que deseas. La incertidumbre puede ser incómoda, pero no significa que el futuro vaya a ser negativo.",
+"Hay momentos en los que necesitamos cerrar una etapa sin tener todas las explicaciones. No siempre encontraremos una respuesta perfecta. A veces la paz llega cuando dejamos de buscarla.",
+"Si alguien te quiere de verdad, podrá entender que también tienes días difíciles. No necesitas mostrar siempre tu mejor versión. La sinceridad y la confianza también forman parte del cariño.",
+"Que encuentres fuerza para decir no cuando algo te hace daño y sí cuando algo te ayuda a crecer. Tus límites también son una forma de cuidarte.",
+"Quizá estés más cerca de un cambio de lo que imaginas. Sigue haciendo lo que puedas, sin obsesionarte con cuándo llegará. Algunas cosas necesitan tiempo para tomar forma.",
+"Hoy quiero dejarte una idea: no compares tu camino con el de otras personas. Cada historia tiene tiempos diferentes. Lo que importa es que tu camino tenga sentido para ti.",
+"Si tienes una preocupación familiar, intenta hablar desde la calma. A veces una conversación sincera puede abrir una puerta que permanecía cerrada simplemente porque nadie se atrevía a dar el primer paso.",
+"Que esta noche puedas dormir dejando fuera de la habitación algunas de tus preocupaciones. Mañana tendrás nuevas fuerzas para ocuparte de aquello que realmente necesite tu atención.",
+"Cuando sientas que todo se acumula, divide los problemas. Uno a uno se pueden afrontar mejor que todos juntos. No necesitas resolver tu vida completa en un solo día.",
+"Hay cambios que al principio asustan y después terminan convirtiéndose en una parte importante de nuestra historia. No juzgues demasiado pronto aquello que todavía está empezando.",
+"Que puedas recuperar algo que habías dejado de hacer por falta de tiempo: escuchar música, pasear, hablar con alguien, reírte o simplemente disfrutar de unos minutos sin obligaciones.",
+"Si hoy alguien necesita escuchar una palabra amable, quizá puedas ser tú quien la diga. Un gesto pequeño puede cambiar completamente el día de otra persona.",
+"Recuerda que descansar no significa abandonar. Puedes detenerte para recuperar fuerzas y después continuar. Incluso los caminos más largos necesitan momentos de pausa.",
+"Hay cosas que no dependen de tu esfuerzo. No cargues sobre tus hombros responsabilidades que pertenecen a otras personas. Haz tu parte y deja que cada uno haga la suya.",
+"Que el próximo capítulo de tu vida tenga más calma que el anterior. No tienes que saber exactamente cómo será. Basta con mantener la puerta abierta a nuevas posibilidades.",
+"Si algo te preocupa desde hace tiempo, intenta compartirlo con alguien de confianza. Poner los pensamientos en palabras muchas veces ayuda a ver con más claridad aquello que parecía imposible de ordenar.",
+"Quizá necesites volver a confiar en ti. Piensa en todas las veces que creíste que no podrías y finalmente encontraste una manera. Tu historia contiene más fuerza de la que recuerdas.",
+"Que hoy tengas un momento en el que puedas decir: estoy bien aquí, ahora. No hace falta esperar a que todo sea perfecto para disfrutar de un instante de tranquilidad.",
+"Los finales pueden doler, pero también pueden abrir espacio. Si una etapa terminó, no significa que todo lo bueno haya terminado contigo. Todavía quedan experiencias que no conoces.",
+"Cuando aparezca una oportunidad que te ilusione, date permiso para intentarlo. No necesitas tener garantías absolutas. A veces crecer consiste precisamente en atreverse con prudencia.",
+"Que las palabras que escuches hoy sean amables. Y si alguien te habla desde la tristeza o el enfado, recuerda que no siempre tienes que cargar con emociones que no son tuyas.",
+"Si llevas mucho tiempo esperando una respuesta, intenta no detener toda tu vida mientras esperas. Continúa con tus cosas, disfruta de lo que sí tienes y permite que el tiempo haga su parte.",
+"Hay una diferencia entre rendirse y cambiar de camino. Si algo no funciona después de intentarlo con sinceridad, buscar otra forma puede ser una decisión inteligente, no un fracaso.",
+"Que puedas mirar hacia atrás sin juzgar demasiado a la persona que eras. Hiciste lo que pudiste con la información y las circunstancias que tenías entonces.",
+"Hoy quizá necesites recordar que mereces tranquilidad. No todo tiene que ser intenso, urgente o complicado. También puedes elegir aquello que te aporta equilibrio.",
+"Si estás comenzando algo nuevo, no esperes hacerlo perfecto desde el principio. Aprende, corrige y continúa. La experiencia llega precisamente porque nos permitimos empezar.",
+"Que nunca te falte una persona con quien puedas hablar sin miedo a ser juzgado. Y si ahora mismo no la tienes cerca, recuerda que buscar apoyo es un paso válido y responsable.",
+"Hay días luminosos y días grises. Ninguno dura para siempre. Cuando llegue un día difícil, céntrate en atravesarlo con paciencia, sin convertir un momento complicado en una conclusión sobre toda tu vida.",
+"Que este mensaje te encuentre en el momento adecuado: no necesitas correr. Sigue a tu ritmo, cuida tu paz y deja que las cosas importantes crezcan sin forzarlas.",
+"Antes de terminar, quiero recordarte algo sencillo: todavía hay momentos que no has vivido, personas que no has conocido y alegrías que no puedes imaginar. Mantén abierta la puerta a lo que venga."
+];
+
+let idx = 0, voiceEnabled = false, speaking = false, lastMessageTime = 0;
+const WAIT_MS = 20000;
+const msg = document.getElementById("message");
+const mouth = document.getElementById("mouth");
+const status = document.getElementById("status");
+const voiceBtn = document.getElementById("voiceBtn");
+
+function showMessage(){ msg.textContent = messages[idx % messages.length]; }
+showMessage();
+
+function chooseVoice(){
+  const voices = speechSynthesis.getVoices();
+  return voices.find(v=>/^es-ES/i.test(v.lang)) ||
+         voices.find(v=>/^es/i.test(v.lang)) || voices[0];
+}
+
+function speakCurrent(){
+  if(!voiceEnabled || !("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(msg.textContent);
+  u.lang = "es-ES";
+  u.rate = .9; u.pitch = 1.0; u.volume = 1;
+  const v = chooseVoice(); if(v) u.voice = v;
+  u.onstart = ()=>{ speaking=true; mouth.classList.add("talking"); status.textContent="HABLANDO…"; };
+  u.onend = ()=>{ speaking=false; mouth.classList.remove("talking"); status.textContent="Listo para el siguiente mensaje"; };
+  u.onerror = ()=>{ speaking=false; mouth.classList.remove("talking"); status.textContent="El navegador ha bloqueado el audio. Pulsa ACTIVAR VOZ."; };
+  speechSynthesis.speak(u);
+}
+
+voiceBtn.onclick = ()=>{
+  voiceEnabled = true;
+  status.textContent = "Voz activada";
+  if (speechSynthesis.getVoices().length) speakCurrent();
+  else setTimeout(speakCurrent,300);
+};
+
+document.getElementById("nextBtn").onclick = ()=>{
+  const now = Date.now();
+  if (now - lastMessageTime < WAIT_MS) {
+    status.textContent = "Espera unos segundos antes del siguiente mensaje";
+    return;
+  }
+  lastMessageTime = now;
+  idx = (idx + 1) % messages.length;
+  showMessage();
+  if(voiceEnabled) setTimeout(speakCurrent,350);
+};
+
+speechSynthesis.onvoiceschanged = ()=>{ if(voiceEnabled && !speaking){} };
+
+// Intenta un mensaje automático después de activar la voz, pero nunca fuerza audio sin interacción.
+</script>
+</body>
+</html>
